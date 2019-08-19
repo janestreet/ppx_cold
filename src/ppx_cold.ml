@@ -12,12 +12,16 @@ class attributes_mapper = object
   method! attributes attrs =
     let attrs =
       List.concat_map attrs ~f:(function
-        | { txt = "cold"; loc }, PStr [] as attr ->
+        | { attr_name = { txt = "cold"; loc };
+            attr_payload = PStr [];
+            attr_loc = _; } as attr ->
           Attribute.mark_as_handled_manually attr;
           let payload = payload_never ~loc in
           [ Loc.make ~loc "ocaml.inline", payload
           ; Loc.make ~loc "ocaml.local", payload
           ; Loc.make ~loc "ocaml.specialise", payload ]
+          |> List.map ~f:(fun (name, payload) ->
+            Ast_builder.Default.attribute ~loc ~name ~payload)
         | attr -> [attr]
       )
     in
