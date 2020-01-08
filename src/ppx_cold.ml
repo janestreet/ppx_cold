@@ -9,7 +9,7 @@ let payload_never ~loc =
 
 let expand_cold_attribute attr =
   assert (String.equal attr.attr_name.txt "cold");
-  let loc = attr.attr_name.loc in
+  let loc = { attr.attr_name.loc with loc_ghost = true } in
   let payload = payload_never ~loc in
   [ Loc.make ~loc "ocaml.inline", payload
   ; Loc.make ~loc "ocaml.local", payload
