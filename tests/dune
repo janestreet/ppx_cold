@@ -1,6 +1,6 @@
 (library (name for_ppx_cold_test) (libraries) (preprocess (pps ppx_cold)))
 
-(rule (targets for_ppx_cold_test.pp-output) (mode fallback)
+(rule (targets for_ppx_cold_test.pp-output)
  (deps (:first_dep for_ppx_cold_test.ml.pp))
  (action (bash "cp %{first_dep} %{targets}")))
 
