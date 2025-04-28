@@ -1,4 +1,4 @@
-open Base
+open Stdppx
 open Ppxlib
 
 let payload_never ~loc =
