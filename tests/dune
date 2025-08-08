@@ -12,5 +12,5 @@
   (bash "cp %{first_dep} %{targets}")))
 
 (alias
- (name DEFAULT)
+ (name default)
  (deps for_ppx_cold_test.pp-output))
